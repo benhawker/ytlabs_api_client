@@ -2,7 +2,6 @@
 
 module RoomalloAPI
   class Client
-
     URL = "https://api.ytlabs.co.kr/stage/v1/"
 
     attr_reader :base_url, :token

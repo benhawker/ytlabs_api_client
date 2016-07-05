@@ -1,6 +1,7 @@
 require 'active_model'
 
 require_relative 'roomallo_api/client'
+require_relative 'roomallo_api/properties'
 
 module RoomalloAPI
   class NetworkError < StandardError
