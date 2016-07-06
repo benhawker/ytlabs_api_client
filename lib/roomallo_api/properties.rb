@@ -8,5 +8,6 @@ module RoomalloAPI
       #TODO
 
     end
+
   end
 end

@@ -16,10 +16,17 @@ describe "RoomoramaAPI" do
     end
   end
 
-  describe "#base_url" do
+  describe "base_url" do
     it "responds with the base url" do
       expect(client).to respond_to (:base_url)
-      expect(client.base_url).to eq ("https://api.ytlabs.co.kr/stage/v1/")
+      expect(client.base_url).to eq ("https://api.ytlabs.co.kr/stage/v1")
+    end
+  end
+
+  describe "#attribute_url" do
+    it "build the endpoint URL correctly" do
+      attribute = "properties"
+      expect(client.attribute_url(attribute)).to eq "https://api.ytlabs.co.kr/stage/v1/properties/"
     end
   end
 
