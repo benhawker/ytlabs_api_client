@@ -1,2 +1,2 @@
-properties: "properties/"
-property: "property/%{property_id}"
+get_properties: "properties"
+get_property: "properties"

@@ -1,1 +1,1 @@
-require_relative "../lib/roomallo_api"
+require "roomallo_api"

@@ -1,14 +1,21 @@
 require 'active_model'
 require 'json'
 require 'yaml'
+require 'httparty'
 
 require_relative 'roomallo_api/client'
-require_relative 'roomallo_api/properties'
 
-module RoomalloAPI
+## Exceptions
+module RoomalloApi
   class NetworkError < StandardError
     def initialize(status, body)
       super("Error. HTTP status: #{status}. Response body: #{body}")
+    end
+  end
+
+  class InvalidAccessToken < StandardError
+    def initialize
+      super("Your access token is not valid. It must be 32 characters long.")
     end
   end
 
@@ -19,5 +26,6 @@ module RoomalloAPI
   end
 
   class ParameterError < StandardError; end
-
+  class InternalServerError < StandardError; end
+  class InvalidResponseError < StandardError; end
 end
