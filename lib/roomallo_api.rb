@@ -1,4 +1,5 @@
 require 'active_model'
+require 'json'
 
 require_relative 'roomallo_api/client'
 require_relative 'roomallo_api/properties'

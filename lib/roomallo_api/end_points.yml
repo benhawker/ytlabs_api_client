@@ -1,0 +1,2 @@
+properties: "properties/"
+property: "property/%{property_id}"
