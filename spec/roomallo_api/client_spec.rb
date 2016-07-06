@@ -26,4 +26,5 @@ describe "RoomoramaAPI" do
   describe "#setup" do
 
   end
+
 end

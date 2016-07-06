@@ -2,6 +2,8 @@
 
 module RoomalloAPI
   class Client
+
+    END_POINTS = YAML::load(File.open(File.join('lib', 'roomallo_api', 'end_points.yml')))
     URL = "https://api.ytlabs.co.kr/stage/v1/"
 
     attr_reader :base_url, :token
@@ -17,6 +19,5 @@ module RoomalloAPI
     def valid_token?(token)
       token.size == 32
     end
-
   end
 end
