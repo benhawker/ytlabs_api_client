@@ -7,6 +7,7 @@ module RoomalloApi
 
     END_POINTS = YAML::load(File.open(File.join('lib', 'roomallo_api', 'end_points.yml')))
     URL = "https://api.ytlabs.co.kr/stage/v1"
+    DEFAULT_LOCALE = "en-US"
 
     attr_reader :base_url, :token, :errors
 
@@ -17,24 +18,28 @@ module RoomalloApi
       @errors = []
     end
 
-    #Testing before removing to a module
-    def get_properties(params_hash=nil)
-
-      #To implement params hash - how to deal in user friendly manner.
+    #Initial testing before removing to a module
+    def get_properties(params=nil)
       HTTParty.get(
-        "#{build_url(__method__.to_s)}?i18n=en-US",
+        "#{build_url(__method__.to_s)}?#{transform_params(params)}",
         headers: { "Authorization" => token.to_s, "Content-Type" => "application/json" }
       )
     end
 
-    def get_property(property_hash, params_hash=nil)
+    def get_property(property_identifier, params=nil)
       HTTParty.get(
-        "#{build_url(__method__.to_s, property_hash)}?i18n=en-US",
+        "#{build_url(__method__.to_s, property_identifier)}?i18n=en-US",
         headers: { "Authorization" => token.to_s, "Content-Type" => "application/json" }
       )
     end
 
-    #Public method to build endpoint URL.
+    private
+
+    def transform_params(params)
+      URI.encode_www_form(params)
+    end
+
+    #Private method to build endpoint URL.
     def build_url(action, identifier = nil)
       end_point = END_POINTS[action]
       # raise(EndpointNotSupported, end_point) unless end_point
@@ -52,10 +57,3 @@ module RoomalloApi
     end
   end
 end
-
-
-  # HTTParty.get(
-  #   "https://api.ytlabs.co.kr/stage/v1/properties/w_w0307360?i18n=en-US",
-  #   headers: { "Authorization" => token.to_s, "Content-Type" => "application/json" }
-  # )
-
