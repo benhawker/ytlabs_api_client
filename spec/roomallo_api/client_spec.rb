@@ -27,13 +27,15 @@ describe "RoomoramaAPI" do
   describe "#get_property" do
     context "with an invalid access token" do
       it "returns an Unauthorized response" do
-        expect(client.get_property("w_w0307360")).to eq {"message"=>"Unauthorized"}
+        expect(client.get_property("w_w0307360")).to include ( {"message"=>"Unauthorized"} )
       end
     end
 
     #TODO - Mock external service
-    it "returns a property within a parsed response" do
-      expect(client.get_property("w_w0307360")).to eq "something"
+    context "with a valid access token" do
+      it "returns a property within a parsed response" do
+        expect(client.get_property("w_w0307360")).to include "something"
+      end
     end
   end
 

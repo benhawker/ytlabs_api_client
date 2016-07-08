@@ -35,6 +35,7 @@ module RoomalloApi
 
     private
 
+    ## Transforms {:a => 2, :b => 2} to "a=2&b=2"
     def transform_params(params)
       URI.encode_www_form(params)
     end
