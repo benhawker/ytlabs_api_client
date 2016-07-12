@@ -19,6 +19,12 @@ module RoomalloApi
     end
   end
 
+  class InvalidContentType < StandardError
+    def initialize
+      super("Your content type is invalid. 'json' or 'xml' are the 2 valid options")
+    end
+  end
+
   class EndPointNotSupported < StandardError
     def initialize(end_point)
       super("This endpoint is not supported: #{end_point}")

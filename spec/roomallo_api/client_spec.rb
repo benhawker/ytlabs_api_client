@@ -3,7 +3,8 @@ require 'spec_helper'
 describe "RoomoramaAPI" do
   ## Generates a 32 char length token.
   let(:token) { SecureRandom.hex(16) }
-  let(:client) { RoomalloApi::Client.new(token) }
+  let(:content_type) { "json" }
+  let(:client) { RoomalloApi::Client.new(token, content_type) }
 
   describe "Client" do
     it "instantiates a new client object" do
