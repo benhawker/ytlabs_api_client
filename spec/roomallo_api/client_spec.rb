@@ -61,6 +61,18 @@ describe "RoomoramaAPI" do
     end
   end
 
+  describe "#camelize_params_keys!(params_hash)" do
+    it "modifies a Rubified set of params keys correctly" do
+      params_hash = { :room_code => "123", :search_start_date => "456" }
+      expect(client.send(:camelize_params_keys!, params_hash)).to eq ({"roomCode"=> "123", "searchStartDate"=> "456"})
+    end
+
+    it "it does not modify keys that are already camelized" do
+      params_hash = { :roomCode => "123", :searchStartDate => "456" }
+      expect(client.send(:camelize_params_keys!, params_hash)).to eq ({"roomCode"=> "123", "searchStartDate"=> "456"})
+    end
+  end
+
 end
 
 

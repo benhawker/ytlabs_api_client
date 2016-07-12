@@ -2,6 +2,7 @@ require 'active_model'
 require 'json'
 require 'yaml'
 require 'httparty'
+require 'active_support/inflector'
 
 require_relative 'roomallo_api/client'
 
