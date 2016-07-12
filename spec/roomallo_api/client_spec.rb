@@ -40,19 +40,23 @@ describe "RoomoramaAPI" do
     end
   end
 
+  private
+
   describe "#build_url" do
     context "without identifier (i.e. a room hash/id)" do
-      xit "build the endpoint URL correctly" do
-        action = "properties"
-        expect(client.send(:build_url, action)).to eq "https://api.ytlabs.co.kr/stage/v1/properties/"
+      it "builds the endpoint URL correctly" do
+        stub_const("RoomalloApi::CLient::END_POINTS", { get_properties: "properties" } )
+        action = "get_properties"
+        expect(client.send(:build_url, action)).to eq "https://api.ytlabs.co.kr/stage/v1/properties"
       end
     end
 
     context "with an identifier (i.e. a room hash/id)" do
-      xit "build the endpoint URL correctly" do
-        action = "properties"
+      it "builds the endpoint URL correctly" do
+        stub_const("RoomalloApi::CLient::END_POINTS", { get_properties: "properties" } )
+        action = "get_properties"
         identifier = "123"
-        expect(client.send(:build_url, action, identifier)).to eq "https://api.ytlabs.co.kr/stage/v1/properties/"
+        expect(client.send(:build_url, action, identifier)).to eq "https://api.ytlabs.co.kr/stage/v1/properties/123"
       end
     end
   end
@@ -61,17 +65,17 @@ end
 
 
 
-    # #Initial testing before removing to a module
-    # def get_properties(params=nil)
-    #   HTTParty.get(
-    #     "#{build_url(__method__.to_s)}?#{transform_params(params)}",
-    #     headers: { "Authorization" => token.to_s, "Content-Type" => "application/json" }
-    #   )
-    # end
+# #Initial testing before removing to a module
+# def get_properties(params=nil)
+#   HTTParty.get(
+#     "#{build_url(__method__.to_s)}?#{transform_params(params)}",
+#     headers: { "Authorization" => token.to_s, "Content-Type" => "application/json" }
+#   )
+# end
 
-    # def get_property(property_identifier, params=nil)
-    #   HTTParty.get(
-    #     "#{build_url(__method__.to_s, property_identifier)}?i18n=en-US",
-    #     headers: { "Authorization" => token.to_s, "Content-Type" => "application/json" }
-    #   )
-    # end
+# def get_property(property_identifier, params=nil)
+#   HTTParty.get(
+#     "#{build_url(__method__.to_s, property_identifier)}?i18n=en-US",
+#     headers: { "Authorization" => token.to_s, "Content-Type" => "application/json" }
+#   )
+# end
