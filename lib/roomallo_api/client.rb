@@ -43,7 +43,7 @@ module RoomalloApi
     # Example usage: client.get_properties( {:updated_at => "1970-01-01", limit => 3} )
 
     def get_properties(params=nil)
-      rubify_params_keys!(params)
+      camelize_params_keys!(params)
 
       HTTParty.get(
         "#{build_url(__method__.to_s)}?#{transform_params!(params)}",
@@ -65,13 +65,15 @@ module RoomalloApi
     # Example usage: client.get_property("w_w0307279", {:i18n => "en-US"} )
 
     def get_property(property_identifier, params=nil)
-      rubify_params_keys!(params)
+      camelize_params_keys!(params)
 
       HTTParty.get(
         "#{build_url(__method__.to_s, property_identifier)}?#{transform_params!(params)}",
         headers: { "Authorization" => token.to_s, "Content-Type" => "#{content_type}" }
       )
     end
+
+
 
 
     # GET /available/
@@ -107,6 +109,140 @@ module RoomalloApi
       )
     end
 
+
+
+
+    # GET /provincecode/
+    # Returns a list with code or name of province.
+    # Optional => i18n        default: "ko-KR"        Return text in other lanaguages(ko-KR, en-US, zh-CN, ja-JP)
+
+    def get_provinces
+      HTTParty.get(
+        "#{build_url(__method__.to_s)}",
+        headers: { "Authorization" => token.to_s, "Content-Type" => "#{content_type}" }
+      )
+    end
+
+
+
+    # GET /citycode/
+    # Returns a list with code or name of cities.
+    # Optional => i18n        default: "ko-KR"        Return text in other lanaguages(ko-KR, en-US, zh-CN, ja-JP)
+
+    def get_cities
+      HTTParty.get(
+        "#{build_url(__method__.to_s)}",
+        headers: { "Authorization" => token.to_s, "Content-Type" => "#{content_type}" }
+      )
+    end
+
+
+
+
+    # GET /extraservicecode/
+    # Returns a list mapping the codes and names of extra services.
+    # Optional => i18n        default: "ko-KR"        Return text in other lanaguages(ko-KR, en-US, zh-CN, ja-JP)
+
+    def get_extra_service_codes
+      HTTParty.get(
+        "#{build_url(__method__.to_s)}",
+        headers: { "Authorization" => token.to_s, "Content-Type" => "#{content_type}" }
+      )
+    end
+
+
+
+
+    # GET /themecode/
+    # Returns a list mapping the code and name of themes.
+    # Optional => i18n        default: "ko-KR"        Return text in other lanaguages(ko-KR, en-US, zh-CN, ja-JP)
+
+    def get_theme_codes
+      HTTParty.get(
+        "#{build_url(__method__.to_s)}",
+        headers: { "Authorization" => token.to_s, "Content-Type" => "#{content_type}" }
+      )
+    end
+
+
+
+    # _________________________________________________________________________________________ #
+
+    # POST /reservation/holding/
+    # Before making a reservation, the room must be held - to prevent double booking.
+    # Other customers cannot make a reservation until the holding status has ended.
+    # If 'pending' is returned in the response, the user can request Reservation Confirm.
+
+    # Format expected (JSON content type):
+    #
+    # {
+    #   "roomCode" : "w_w0814002_R01",
+    #   "checkInDate" : "2016-09-15",
+    #   "checkOutDate" : "2016-09-16"
+    # }
+
+    def post_reservation_request(property_identifier, start_date, end_date)
+      request_body = {
+                 :roomCode     => "#{property_identifier}",
+                 :checkInDate  => "#{start_date}",
+                 :checkOutDate => "#{end_date}"
+               }.to_json
+
+     # params = {
+     #   :roomCode     => "bob",
+     #   :checkInDate  => "joe",
+     #   :checkOutDate => "steve"
+     # }.to_json
+
+      HTTParty.post(
+        "#{build_url(__method__.to_s)}",
+        body:    request_body,
+        headers: { "Authorization" => token.to_s, "Content-Type" => "#{content_type}" }
+      )
+
+    end
+
+    # POST /reservation/confirm/
+    # The user must have a valid reservation number that will have been returned by making a successful 'reservation request'.
+
+    # Format expected (JSON content type):
+    #
+    # {
+    #  *** Required ***
+    #   "reservationNo" : "w_WP000000000000000",
+    #   "roomtypeCode" : "w_w0814002_R01",
+    #   "checkInDate" : "2016-09-15",
+    #   "checkOutDate" : "2016-09-16",
+    #   "guestName" : "Lucy",
+    #   "guestCount" : 3,
+    #   "adultCount" : 2,
+    #   "childrenCount" : 1,
+    #   "paidPrice" : 2000.0,
+    #   "sellingPrice" : 2000.0,
+    #   "commissionPrice" : 200.0,
+    #   "currency" : "KRW",
+    #
+    #  *** Optional ***
+    #   "guestPhone" : "010-0000-0000",
+    #   "guestEmail" : "aaa@mail.com",
+    #   "guestNationality" : "Korea"
+    # }
+
+    def post_reservation_confirmation(request_body={})
+      HTTParty.post(
+        "#{build_url(__method__.to_s)}",
+        body:    request_body.to_json,
+        headers: { "Authorization" => token.to_s, "Content-Type" => "#{content_type}" }
+      )
+    end
+
+    # POST /reservation/cancel/
+
+    # GET /reservation/information
+    # https://api.ytlabs.co.kr/stage/v1/reservation/information?searchStartDate=2016-07-01&searchEndDate=2016-07-10&reservationNo=
+
+    # _________________________________________________________________________________________ #
+
     private
 
     ## Transforms {:a => 2, :b => 2} to "a=2&b=2"
@@ -115,12 +251,11 @@ module RoomalloApi
     end
 
     ## Accepts underscored variables/params & converts them to camelCase as required by the Roomallo API.
-    ## The intention to to 'Rubify' the wrapper, following Ruby conventions.
-
+    ## The intention is to 'Rubify' the wrapper allowing users to use it in a Ruby friendly way.
     # Example:
-    # rubify_params_keys!({:room_code=>"123", :search_start_date=>"456"})
+    # camelize_params_keys!({:room_code=>"123", :search_start_date=>"456"})
     # => {"roomCode"=>"123", "searchStartDate"=>"456"}
-    def rubify_params_keys!(params_hash)
+    def camelize_params_keys!(params_hash)
       return unless params_hash
 
       params_hash.keys.each do |key|

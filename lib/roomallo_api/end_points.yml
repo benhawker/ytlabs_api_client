@@ -1,3 +1,16 @@
-get_properties: "properties"
-get_property: "properties"
-get_availability: "available"
+# GET Requests
+
+get_properties: 		 "properties"
+get_property: 			 "properties"
+get_availability: 		 "available"
+
+get_provinces: 			 "provincecode"
+get_cities: 			 "citycode"
+get_extra_service_codes: "extraservicecode"
+get_theme_codes: 		 "themecode"
+
+
+# POST Requests
+
+post_reservation_request: 		"reservation/holding/"
+post_reservation_confirmation:	"reservation/confirm/"
