@@ -5,6 +5,9 @@ require_relative 'availability'
 require_relative 'booking'
 require_relative 'property'
 require_relative 'supplementary_information'
+require_relative 'cancellation'
+require_relative 'room_type'
+
 
 module RoomalloApi
   class Client
@@ -14,7 +17,7 @@ module RoomalloApi
     include RoomalloApi::Booking
     include RoomalloApi::Cancellation
     include RoomalloApi::Property
-    include RoomallpApi::RoomType
+    include RoomalloApi::RoomType
     include RoomalloApi::SupplementaryInformation
 
     END_POINTS = YAML::load(File.open(File.join('lib', 'roomallo_api', 'end_points.yml')))

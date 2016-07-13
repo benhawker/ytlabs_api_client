@@ -12,7 +12,7 @@ module RoomalloApi
     # GET /properties/{propertyID}/roomtypes/
     # Using a specific propertyID, get all roomtypes' information of the property.
 
-     def get_property_room_types(params=nil)
+    def get_property_room_types(params=nil)
 
     end
 
