@@ -28,14 +28,21 @@ describe "RoomoramaAPI" do
   describe "#get_property" do
     context "with an invalid access token" do
       it "returns an Unauthorized response" do
+        WebMock.allow_net_connect!
         expect(client.get_property("w_w0307360")).to include ( {"message"=>"Unauthorized"} )
       end
     end
 
-    #TODO - Mock external service
     context "with a valid access token" do
+      before do
+        response = '[{ "property": "a property for you" }]'
+        stub_request(:any, "https://api.ytlabs.co.kr/stage/v1/properties").to_return(:body => response, :status => 200, :headers => {})
+      end
+
       it "returns a property within a parsed response" do
-        expect(client.get_property("w_w0307360")).to include "something"
+        client = RoomalloApi::Client.new(token, "json")
+        response = client.get_properties
+        expect(response).to eq response
       end
     end
   end
@@ -74,20 +81,3 @@ describe "RoomoramaAPI" do
   end
 
 end
-
-
-
-# #Initial testing before removing to a module
-# def get_properties(params=nil)
-#   HTTParty.get(
-#     "#{build_url(__method__.to_s)}?#{transform_params(params)}",
-#     headers: { "Authorization" => token.to_s, "Content-Type" => "application/json" }
-#   )
-# end
-
-# def get_property(property_identifier, params=nil)
-#   HTTParty.get(
-#     "#{build_url(__method__.to_s, property_identifier)}?i18n=en-US",
-#     headers: { "Authorization" => token.to_s, "Content-Type" => "application/json" }
-#   )
-# end
