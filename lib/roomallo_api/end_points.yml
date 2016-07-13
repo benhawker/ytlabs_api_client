@@ -8,7 +8,16 @@ get_cities: 			 "citycode"
 get_extra_service_codes: "extraservicecode"
 get_theme_codes: 		 "themecode"
 
+get_reservations: 		 "resveration/information"
+
+get_room_types:			 "roomtypes"
+get_property_room_types: "properties"
+
+get_cancellation_charge: "reservation/cancelcharge"
+
 
 # POST Requests
 post_reservation_request: 		"reservation/holding"
 post_reservation_confirmation:	"reservation/confirm"
+
+post_cancel_reservation: 		"reservation/cancel'

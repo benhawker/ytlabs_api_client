@@ -12,7 +12,9 @@ module RoomalloApi
 
     include RoomalloApi::Availability
     include RoomalloApi::Booking
+    include RoomalloApi::Cancellation
     include RoomalloApi::Property
+    include RoomallpApi::RoomType
     include RoomalloApi::SupplementaryInformation
 
     END_POINTS = YAML::load(File.open(File.join('lib', 'roomallo_api', 'end_points.yml')))

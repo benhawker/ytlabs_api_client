@@ -66,12 +66,35 @@ module RoomalloApi
 
     # _________________________________________________________________________________________ #
 
-    # POST /reservation/cancel/
-
-    # _________________________________________________________________________________________ #
-
     # GET /reservation/information
-    # https://api.ytlabs.co.kr/stage/v1/reservation/information?searchStartDate=2016-07-01&searchEndDate=2016-07-10&reservationNo=
+
+    # Use this resource with a set of dates to retrieve a collection of reservations between the given dates
+    # OR
+    # Use this resource with a reservation identifier(hash) + the start date to retrieve a collection of one reservation.
+    #
+    # Parameters:
+    #
+    #     Required => start_date                                         YYYY-MM-DD (ex: 2016-02-01). Search by start date.
+    #     Required => end_date                                           YYYY-MM-DD (ex: 2016-02-05). Search by end date.
+    #     Optional => reservation_identifier                             The unique property identifier/hash (e.g. w_w0307279)
+    #
+    # Example Request: https://api.ytlabs.co.kr/stage/v1/reservation/information?searchStartDate=2016-07-01&searchEndDate=2016-07-10&reservationNo=
+    #
+    # Example usage: client.get_reservations("w_w0307279_R01", "2016-12-01", "2016-12-10")
+
+    def get_reservations(start_date, end_date, reservation_identifier=nil)
+      params = {
+                 :searchStartDate => "#{start_date}",
+                 :searchEndDate => "#{end_date}"
+               }
+
+      params.merge!( :roomCode => "#{reservation_identifier}" ) if reservation_identifier
+
+      HTTParty.get(
+        "#{build_url(__method__.to_s)}?#{transform_params!(params)}",
+        headers: { "Authorization" => token.to_s, "Content-Type" => "#{content_type}" }
+      )
+    end
 
   end
 end
