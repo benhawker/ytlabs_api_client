@@ -1,5 +1,4 @@
 # GET Requests
-
 get_properties: 		 "properties"
 get_property: 			 "properties"
 get_availability: 		 "available"
@@ -11,6 +10,5 @@ get_theme_codes: 		 "themecode"
 
 
 # POST Requests
-
-post_reservation_request: 		"reservation/holding/"
-post_reservation_confirmation:	"reservation/confirm/"
+post_reservation_request: 		"reservation/holding"
+post_reservation_confirmation:	"reservation/confirm"
