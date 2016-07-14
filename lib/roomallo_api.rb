@@ -8,6 +8,8 @@ require_relative 'roomallo_api/client'
 
 ## Exceptions
 module RoomalloApi
+
+  #To be implemented.
   class NetworkError < StandardError
     def initialize(status, body)
       super("Error. HTTP status: #{status}. Response body: #{body}")
@@ -16,7 +18,7 @@ module RoomalloApi
 
   class InvalidAccessToken < StandardError
     def initialize
-      super("Your access token is not valid. It must be 32 characters long.")
+      super("Your access token is not valid. It must be 36 characters long.")
     end
   end
 
@@ -27,12 +29,8 @@ module RoomalloApi
   end
 
   class EndPointNotSupported < StandardError
-    def initialize(end_point)
-      super("This endpoint is not supported: #{end_point}")
+    def initialize
+      super("This endpoint is not supported: Try one of these: #{Client::END_POINTS.keys}")
     end
   end
-
-  class ParameterError < StandardError; end
-  class InternalServerError < StandardError; end
-  class InvalidResponseError < StandardError; end
 end

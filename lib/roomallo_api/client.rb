@@ -22,7 +22,7 @@ module RoomalloApi
 
     END_POINTS = YAML::load(File.open(File.join('lib', 'roomallo_api', 'end_points.yml')))
     URL = "https://api.ytlabs.co.kr/stage/v1"
-    VALID_CONTENT_TYPES = ["json", "xml"]
+    VALID_CONTENT_TYPES = ["json", "xml"].freeze
 
     format :json
     default_timeout 1 #Hard timeout after 1 second.
@@ -30,13 +30,15 @@ module RoomalloApi
     attr_reader :token, :content_type, :base_url, :errors
 
     def initialize(token, content_type=nil)
-      raise InvalidAccessToken unless valid_token?(token)
-      raise InvalidContentType unless valid_content_type?(content_type)
       @token = token
       @content_type = "application/#{content_type}" || "application/json"
       @base_url = URL
       @errors = []
+
+      raise InvalidAccessToken unless valid_token?(token)
+      raise InvalidContentType unless valid_content_type?(content_type)
     end
+
 
     # HTTParty will raise Net::OpenTimeout if it can't connect to the server.
     # It will raise Net::ReadTimeout if reading the response from the server times out.
@@ -47,14 +49,20 @@ module RoomalloApi
     #       your HTTParty call.
     #     end
 
-    def handle_timeouts
-      begin
-        yield
-      rescue Net::OpenTimeout, Net::ReadTimeout
-        {}
-      end
-    end
+    # TODO
+    # def handle_timeouts
+    #   begin
+    #     yield
+    #   rescue Net::OpenTimeout, Net::ReadTimeout
+    #     {}
+    #   end
+    # end
 
+    # Since the only public methods this client supports are calls to the specified endpoints,
+    # which are implemented - we will raise a more specific error here.
+    def method_missing(method, *args, &block)
+      raise EndPointNotSupported
+    end
 
     private
 
@@ -66,7 +74,6 @@ module RoomalloApi
 
     ## Accepts underscored variables/params & converts them to camelCase as required by the Roomallo API.
     ## The intention is to 'Rubify' the wrapper allowing underscore_style_variable_naming.
-
     ## Example:
     ## camelize_params_keys!({:room_code=>"123", :search_start_date=>"456"})
     ## => {"roomCode"=>"123", "searchStartDate"=>"456"}
@@ -84,7 +91,6 @@ module RoomalloApi
     ## Builds endpoint URL dynamically.
     def build_url(action, identifier=nil)
       end_point = END_POINTS[action]
-      # raise(EndpointNotSupported, end_point) unless end_point
 
       if identifier
         url = "#{base_url}/#{end_point}/#{identifier}"
@@ -94,8 +100,23 @@ module RoomalloApi
       url
     end
 
+    # The responses from the API are somewhat misleading. Calls that one might expect to 404 seem to return 403 Forbidden
+    # with "message"=>"Authorization header requires 'Credential' parameter. Consider how to provide more helpful messages.
+    def prepare_response(response)
+      if response.parsed_response["status"] == 200..206
+        parse_successful_response(response)
+      else
+        # Temporary
+        JSON.parse(response.body)
+      end
+    end
+
+    def parse_successful_response(response)
+      JSON.parse(response.body)
+    end
+
     def valid_token?(token)
-      token.size == 32
+      token.size == 36
     end
 
     def valid_content_type?(content_type)

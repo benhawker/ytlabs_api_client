@@ -6,10 +6,12 @@ module RoomalloApi
     # Optional => i18n        default: "ko-KR"        Return text in other lanaguages(ko-KR, en-US, zh-CN, ja-JP)
 
     def get_provinces
-      HTTParty.get(
+      response = HTTParty.get(
         "#{build_url(__method__.to_s)}",
         headers: { "Authorization" => token.to_s, "Content-Type" => "#{content_type}" }
       )
+
+      prepare_response(response)
     end
 
     # _________________________________________________________________________________________ #
@@ -19,10 +21,12 @@ module RoomalloApi
     # Optional => i18n        default: "ko-KR"        Return text in other lanaguages(ko-KR, en-US, zh-CN, ja-JP)
 
     def get_cities
-      HTTParty.get(
+      response = HTTParty.get(
         "#{build_url(__method__.to_s)}",
         headers: { "Authorization" => token.to_s, "Content-Type" => "#{content_type}" }
       )
+
+      prepare_response(response)
     end
 
     # _________________________________________________________________________________________ #
@@ -32,10 +36,12 @@ module RoomalloApi
     # Optional => i18n        default: "ko-KR"        Return text in other lanaguages(ko-KR, en-US, zh-CN, ja-JP)
 
     def get_extra_service_codes
-      HTTParty.get(
+      response = HTTParty.get(
         "#{build_url(__method__.to_s)}",
         headers: { "Authorization" => token.to_s, "Content-Type" => "#{content_type}" }
       )
+
+      prepare_response(response)
     end
 
     # _________________________________________________________________________________________ #
@@ -45,10 +51,12 @@ module RoomalloApi
     # Optional => i18n        default: "ko-KR"        Return text in other lanaguages(ko-KR, en-US, zh-CN, ja-JP)
 
     def get_theme_codes
-      HTTParty.get(
+      response = HTTParty.get(
         "#{build_url(__method__.to_s)}",
         headers: { "Authorization" => token.to_s, "Content-Type" => "#{content_type}" }
       )
+
+      prepare_response(response)
     end
 
   end

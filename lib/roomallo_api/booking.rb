@@ -32,6 +32,8 @@ module RoomalloApi
 
     # POST /reservation/confirm/
     # The user must have a valid reservation number that will have been returned by making a successful 'reservation request'.
+    #
+    # Note that this method accepts a body with keys specified in camelcase.
 
     # Format expected (JSON content type):
     #
@@ -90,10 +92,12 @@ module RoomalloApi
 
       params.merge!( :roomCode => "#{reservation_identifier}" ) if reservation_identifier
 
-      HTTParty.get(
+      response = HTTParty.get(
         "#{build_url(__method__.to_s)}?#{transform_params!(params)}",
         headers: { "Authorization" => token.to_s, "Content-Type" => "#{content_type}" }
       )
+
+      prepare_response(response)
     end
 
   end

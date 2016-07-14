@@ -18,17 +18,19 @@ module RoomalloApi
     #
     # Example Request: https://api.ytlabs.co.kr/stage/v1/properties?i18n=en-US&offset=0&limit=30&active=1&updatedAt=2016-05-24
     #
-    # Example usage: client.get_properties( {:updated_at => "1970-01-01", limit => 3} )
+    # Example usage: client.get_properties(:updated_at => "1970-01-01", :limit => 3)
 
     def get_properties(params=nil)
       camelize_params_keys!(params)
 
-      HTTParty.get(
+      response = HTTParty.get(
         "#{build_url(__method__.to_s)}?#{transform_params!(params)}",
         headers: { "Authorization" => token.to_s, "Content-Type" => "#{content_type}" }
       )
+
+      prepare_response(response)
     end
-    #response.parsed_response["data"]["items"]
+
 
     # _________________________________________________________________________________________ #
 
@@ -43,16 +45,17 @@ module RoomalloApi
     #
     # Example Request: https://api.ytlabs.co.kr/stage/v1/properties/w_w0307279?i18n=en-US
     #
-    # Example usage: client.get_property("w_w0307279", {:i18n => "en-US"} )
+    # Example usage: client.get_property("w_w0307279", :i18n => "en-US")
 
     def get_property(property_identifier, params=nil)
       camelize_params_keys!(params)
 
-      HTTParty.get(
+      response = HTTParty.get(
         "#{build_url(__method__.to_s, property_identifier)}?#{transform_params!(params)}",
         headers: { "Authorization" => token.to_s, "Content-Type" => "#{content_type}" }
       )
-    end
 
+      prepare_response(response)
+    end
   end
 end

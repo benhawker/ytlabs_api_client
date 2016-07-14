@@ -21,17 +21,14 @@ module RoomalloApi
                  :searchStartDate => "#{start_date}"
                }
 
-      # params = {
-      #            :roomCode => "123",
-      #            :searchStartDate => "456"
-      #          }
-
       params.merge!(:searchEndDate  => "#{end_date}") if end_date
 
-      HTTParty.get(
+      response = HTTParty.get(
         "#{build_url(__method__.to_s)}?#{transform_params!(params)}",
         headers: { "Authorization" => token.to_s, "Content-Type" => "#{content_type}" }
       )
+
+      prepare_response(response)
     end
 
   end
