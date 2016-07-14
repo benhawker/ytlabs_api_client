@@ -20,4 +20,4 @@ get_cancellation_charge: "reservation/cancelcharge"
 post_reservation_request: 		"reservation/holding"
 post_reservation_confirmation:	"reservation/confirm"
 
-post_cancel_reservation: 		"reservation/cancel"
+post_cancellation_request: 		"reservation/cancel"
