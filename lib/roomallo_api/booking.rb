@@ -82,7 +82,7 @@ module RoomalloApi
     #
     # Example Request: https://api.ytlabs.co.kr/stage/v1/reservation/information?searchStartDate=2016-07-01&searchEndDate=2016-07-10&reservationNo=
     #
-    # Example usage: client.get_reservations("w_w0307279_R01", "2016-12-01", "2016-12-10")
+    # Example usage: client.get_reservations("2016-07-01", "2016-07-10", "w_w0307279_R01")
 
     def get_reservations(start_date, end_date, reservation_identifier=nil)
       params = {
