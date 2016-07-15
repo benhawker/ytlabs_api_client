@@ -30,8 +30,5 @@ module RoomalloApi
 
       prepare_response(response)
     end
-
-    https://api.ytlabs.co.kr/stage/v1/available?roomCode=w_w0307279_R01&searchStartDate=2016-07-01&searchEndDate=2016-07-10
-
   end
 end

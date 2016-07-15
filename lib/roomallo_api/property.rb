@@ -20,7 +20,7 @@ module RoomalloApi
     #
     # Example usage: client.get_properties(:updated_at => "1970-01-01", :limit => 3)
 
-    def get_properties(params=nil)
+    def get_properties(params)
       camelize_params_keys!(params)
 
       response = HTTParty.get(

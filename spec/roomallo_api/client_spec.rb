@@ -37,8 +37,8 @@ describe RoomalloApi::Client do
 
     context "invalid/not implemented method/endpoint called" do
       it "raises when invalid endpoint is called" do
-        error_message = 'This endpoint is not supported: Try one of these: ["get_properties", "get_property", "get_availability", "get_provinces", "get_cities", "get_extra_service_codes", "get_theme_codes", "get_reservations", "get_room_types", "get_property_room_types", "get_cancellation_charge", "post_reservation_request", "post_reservation_confirmation", "post_cancel_reservation"]'
-        expect { client.bob }.to raise_error (error_message)
+        error_message = 'This endpoint is not supported: Try one of these: ["get_properties", "get_property", "get_availability", "get_provinces", "get_cities", "get_extra_service_codes", "get_theme_codes", "get_reservations", "get_room_types", "get_property_room_types", "get_cancellation_charge", "post_reservation_request", "post_reservation_confirmation", "post_cancellation_request"]'
+        expect { client.bob }.to raise_error.with_message (error_message)
       end
     end
   end

@@ -5,7 +5,7 @@ module RoomalloApi
     # Returns a list with code or name of province.
     # Optional => i18n        default: "ko-KR"        Return text in other lanaguages(ko-KR, en-US, zh-CN, ja-JP)
 
-    def get_provinces
+    def get_provinces(i18n=nil)
       response = HTTParty.get(
         "#{build_url(__method__.to_s)}",
         headers: { "Authorization" => token.to_s, "Content-Type" => "#{content_type}" }

@@ -3,6 +3,14 @@ Roomallo API Client
 
 ## A Ruby wrapper allowing easy calls to the Roomallo API. A work in progress.
 
+### Requirements:
+
+httparty [github.com/jnunemaker/httparty]
+
+```
+client = RoomalloApi::Client.new("your_token", "json")
+```
+
 ### Usage:
 
 ```
@@ -28,6 +36,7 @@ Use this resource to get a response a list of properties in the Roomallo API.
 When parameter 'limit=0&updatedAt=1970-01-01' is specified in request, all of the properties' information is
 returned. It is recommended only for the first ever call made to retrieve all information.
 
+Usage: get_property(params)
 Example usage: client.get_properties(:updated_at => "1970-01-01", :limit => 3)
 ```
 
@@ -38,6 +47,7 @@ Use this resource with a property_identifier (e.g. "w_w0307279") to get the prop
 - Required => property_identifier                 The unique property identifier/hash (e.g. w_w0307279)
 - Optional => i18n        default: "ko-KR"        Return text in other lanaguages(ko-KR, en-US, zh-CN, ja-JP)
 
+Usage: get_property(property_identifier, params=nil)
 Example usage: client.get_property("w_w0307279", :i18n => "en-US")
 ```
 
@@ -49,6 +59,7 @@ Required => property_identifier                         The unique property iden
 Required => start_date                                  YYYY-MM-DD (ex: 2016-02-01). Stay start date.
 Optional => end_date      default: start_date + 1 day   YYYY-MM-DD (ex: 2016-02-05). Stay end date. If empty, defaults to start_date + 1 day.
 
+Usage: get_availability(property_identifier, start_date, end_date=nil)
 Example usage: client.get_availability("w_w0307279_R01", "2016-07-01", "2016-07-10")
 ```
 

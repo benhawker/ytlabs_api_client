@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.description = 'Roomallo API Client - wrapper which allows to make authenticated calls to the Roomallo API'
   s.authors  = 'Ben Hawker'
   s.email    = 'ben.c.hawker@gmail.com'
-  s.files    =   Dir.glob("{lib,spec,doc}/**/*") + %w(Gemfile README.md)
+  s.files    =   Dir.glob("{lib,spec}/**/*") + %w(Gemfile README.md)
   s.license  = 'MIT'
 
   s.add_dependency 'activemodel'
