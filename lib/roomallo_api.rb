@@ -9,7 +9,7 @@ require_relative 'roomallo_api/client'
 ## Exceptions
 module RoomalloApi
 
-  #To be implemented.
+  #To be implemented in the Client.
   class NetworkError < StandardError
     def initialize(status, body)
       super("Error. HTTP status: #{status}. Response body: #{body}")

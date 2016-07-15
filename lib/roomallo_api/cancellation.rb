@@ -13,7 +13,7 @@ module RoomalloApi
     #   "currency" : "KRW"
     # }
 
-    def post_reservation_request(reservation_number, paid_price, commission_price, currency)
+    def post_cancellation_request(reservation_number, paid_price, commission_price, currency)
       request_body = {
                  :reservationNo         => "#{reservation_number}",
                  :refundPaidPrice       => "#{paid_price}",

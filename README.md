@@ -1,7 +1,7 @@
 Roomallo API Client
 ===================
 
-## A Ruby wrapper allowing easy calls to the Roomallo API.
+## A Ruby wrapper allowing easy calls to the Roomallo API. A work in progress.
 
 ### Usage:
 
@@ -42,36 +42,50 @@ Example usage: client.get_property("w_w0307279", :i18n => "en-US")
 ```
 
 ```
-get_availability:     "GET /available/{propertyID}"
+ERRORS. get_availability:     "GET /available/{propertyID}"
 Use this resource with a property_identifier (e.g. "w_w0307279") & a stay start_date to obtain rates & availability.
+
+Required => property_identifier                         The unique property identifier/hash (e.g. w_w0307279)
+Required => start_date                                  YYYY-MM-DD (ex: 2016-02-01). Stay start d
+Optional => end_date      default: start_date + 1 day   YYYY-MM-DD (ex: 2016-02-05). Stay end date. If empty, defaults to start_date + 1 day.
+
+Example usage: client.get_availability("w_w0307279_R01", "2016-12-01", "2016-12-10")
 ```
 
 ```
 get_provinces:        "GET /provincecode/"
 Returns a list with code or name of province.
 - Optional => i18n        default: "ko-KR"        Return text in other lanaguages(ko-KR, en-US, zh-CN, ja-JP)
+
+Example usage: client.get_provinces
 ```
 
 ```
 get_cities:       "GET /citycode/"
 Returns a list with code or name of cities.
 - Optional => i18n        default: "ko-KR"        Return text in other lanaguages(ko-KR, en-US, zh-CN, ja-JP)
+
+Example usage: client.get_cities
 ```
 
 ```
 get_extra_service_codes: "GET /extraservicecode/"
 Returns a list mapping the codes and names of extra services.
 - Optional => i18n        default: "ko-KR"        Return text in other lanaguages(ko-KR, en-US, zh-CN, ja-JP)
+
+Example usage: client.get_extra_service_codes
 ```
 
 ```
 get_theme_codes:      "GET /themecode/"
 Returns a list mapping the code and name of themes.
 - Optional => i18n        default: "ko-KR"        Return text in other lanaguages(ko-KR, en-US, zh-CN, ja-JP)
+
+Example usage: client.get_theme_codes
 ```
 
 ```
-get_reservations:     "GET /reservation/information"
+ERRORS. get_reservations:     "GET /reservation/information"
 1. Use this resource with a set of dates to retrieve a collection of reservations between the given dates
 2. Use this resource with a reservation identifier(hash) + the start date to retrieve a collection of one reservation.
 
@@ -117,7 +131,7 @@ Example usage: client.get_cancellation_charge("w_WP20160705145532ECD5")
 -------
 
 ```
-post_reservation_request(property_identifier, start_date, end_date):     "POST /reservation/holding/"
+TO BE TESTED. post_reservation_request(property_identifier, start_date, end_date):     "POST /reservation/holding/"
 
 Before making a reservation, the room must be held - to prevent double booking.
 
@@ -127,15 +141,17 @@ Format expected (JSON content type):
     "checkInDate" : "2016-09-15",
     "checkOutDate" : "2016-09-16"
   }
+
+Example usage: client.post_reservation_request("w_w0307279", "2016-09-15", "2016-09-18")
 ```
 
 
 ```
-post_reservation_confirmation: "POST /reservation/confirm"
+TO BE TESTED. post_reservation_confirmation: "POST /reservation/confirm"
 
 ```
 
 ```
-post_cancel_reservation:     "POST /reservation/cancel"
+TO BE TESTED. post_cancel_reservation:     "POST /reservation/cancel"
 
 ```
