@@ -112,6 +112,21 @@ describe RoomalloApi::Client do
     end
   end
 
+  context "supplementary_information" do
+    describe "#get_provinces" do
+      before do
+        response = '[{ "province_one": "great place", "province_two": "an ever better place" }]'
+        stub_request(:any, "https://api.ytlabs.co.kr/stage/v1/provincecode").to_return(:body => response, :status => 200, :headers => {})
+      end
+
+      it "returns a property within a parsed response" do
+        client = RoomalloApi::Client.new(token, :json)
+        response = client.get_provinces
+        expect(response).to eq response
+      end
+    end
+  end
+
   private
 
   describe "#build_url" do
