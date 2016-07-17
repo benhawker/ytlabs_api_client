@@ -1,23 +1,26 @@
+# Define each endpoint here +end_points.yml+ to map a method name to
+# an endpoint that it will call on the API.
+
 # GET Requests
-get_properties: 		 "properties"
-get_property: 			 "properties"
-get_availability: 		 "available"
+get_properties: 		     "properties"
+get_property: 			     "properties"
+get_availability: 		   "available"
 
-get_provinces: 			 "provincecode"
-get_cities: 			 "citycode"
+get_provinces: 			     "provincecode"
+get_cities: 			       "citycode"
 get_extra_service_codes: "extraservicecode"
-get_theme_codes: 		 "themecode"
+get_theme_codes: 		     "themecode"
 
-get_reservations: 		 "resveration/information"
+get_reservations: 		   "resveration/information"
 
-get_room_types:			 "roomtypes"
+get_room_types:			     "roomtypes"
 get_property_room_types: "properties"
 
 get_cancellation_charge: "reservation/cancelcharge"
 
 
 # POST Requests
-post_reservation_request: 		"reservation/holding"
+post_reservation_request: 		  "reservation/holding"
 post_reservation_confirmation:	"reservation/confirm"
 
-post_cancellation_request: 		"reservation/cancel"
+post_cancellation_request: 		  "reservation/cancel"

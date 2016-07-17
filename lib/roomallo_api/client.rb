@@ -1,5 +1,8 @@
-## Intial proposed usage ++ client = RoomalloApi::Client.new("your_token")
-## client.get_properties(your_params)
+# +RoomalloApi::Client+ - entry class to the API client.
+#
+# Proposed usage:
+# => client = RoomalloApi::Client.new("your_token", :json)
+# => client.get_properties(params_hash)
 
 require_relative 'availability'
 require_relative 'booking'

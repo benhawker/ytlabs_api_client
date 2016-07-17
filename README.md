@@ -3,7 +3,9 @@ Roomallo API Client
 
 A Ruby wrapper packaged as a Gem enabling Ruby calls to the Yello Travel Labs API which provides endpoints to search & book their inventory of Korea based rental properties. Visit Yello Travel Labs at [http://www.ytlabs.co.kr/](http://www.ytlabs.co.kr/). You will need an access token.
 
-A work in progress as of July 2016.
+The YTLabs API uses camelCase params, however as this is a Ruby wrapper I have followed the Ruby convention of using underscore_case parameter naming, with the exception of `POST /reservation/confirm/`. The belows README (and also the comments above the definition of each method) documents all required and optional parameter formats.
+
+A work in progress as of July 2016, hence currently calling staging url.
 
 ### Requirements:
 
