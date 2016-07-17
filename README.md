@@ -1,13 +1,15 @@
 Roomallo API Client
 ===================
 
-A Ruby wrapper packaged as a Gem enabling Ruby calls to the Yello Travel Labs API which provides endpoints to search & book their inventory of Korea based rental properties. Visit Yello Travel Labs at [http://www.ytlabs.co.kr/](http://www.ytlabs.co.kr/). You will need an access token for access.
+A Ruby wrapper packaged as a Gem enabling Ruby calls to the Yello Travel Labs API which provides endpoints to search & book their inventory of Korea based rental properties. Visit Yello Travel Labs at [http://www.ytlabs.co.kr/](http://www.ytlabs.co.kr/). You will need an access token.
 
 A work in progress as of July 2016.
 
 ### Requirements:
 
-httparty [github.com/jnunemaker/httparty]
+httparty [github.com/jnunemaker/httparty](http://www.github.com/jnunemaker/httparty)
+
+===================
 
 ### Usage:
 
@@ -19,7 +21,6 @@ client = RoomalloApi::Client.new("your_token", :json)
 
 #### GET Requests
 ===================
-
 
 get_properties:     "GET /properties/"
 ```
@@ -37,7 +38,7 @@ returned. It is recommended only for the first ever call made to retrieve all in
 Usage: get_property(params)
 Example usage: client.get_properties(:updated_at => "1970-01-01", :limit => 3)
 ```
-
+===================
 
 get_property:       "GET /properties/{propertyID}/"
 ```
@@ -49,7 +50,7 @@ Use this resource with a property_identifier (e.g. "w_w0307279") to get the prop
 Usage: get_property(property_identifier, params=nil)
 Example usage: client.get_property("w_w0307279", :i18n => "en-US")
 ```
-
+===================
 
 get_availability:     "GET /available/{propertyID}"
 ```
@@ -62,7 +63,7 @@ Optional => end_date      default: (start_date + 1 day) YYYY-MM-DD (ex: 2016-02-
 Usage: get_availability(property_identifier, start_date, end_date=nil)
 Example usage: client.get_availability("w_w0307279_R01", "2016-07-01", "2016-07-10")
 ```
-
+===================
 
 get_provinces:        "GET /provincecode/"
 ```
@@ -71,7 +72,7 @@ Returns a list with code or name of province.
 
 Example usage: client.get_provinces
 ```
-
+===================
 
 get_cities:       "GET /citycode/"
 ```
@@ -80,6 +81,7 @@ Returns a list with code or name of cities.
 
 Example usage: client.get_cities
 ```
+===================
 
 
 get_extra_service_codes: "GET /extraservicecode/"
@@ -89,7 +91,7 @@ Returns a list mapping the codes and names of extra services.
 
 Example usage: client.get_extra_service_codes
 ```
-
+===================
 
 get_theme_codes:      "GET /themecode/"
 ```
@@ -98,7 +100,7 @@ Returns a list mapping the code and name of themes.
 
 Example usage: client.get_theme_codes
 ```
-
+===================
 
 ERRORS. get_reservations:     "GET /reservation/information"
 ```
@@ -111,7 +113,7 @@ ERRORS. get_reservations:     "GET /reservation/information"
 
 Example usage: client.get_reservations("2016-07-01", "2016-07-10", "w_w0307279_R01")
 ```
-
+===================
 
 get_room_types:       "GET /roomtypes/"
 ```
@@ -124,6 +126,7 @@ Use this resource to obtain a list of all room types.
 
 Example usage: client.get_room_types(:updated_at => "1970-01-01", :limit => 1)
 ```
+===================
 
 get_property_room_types: "GET /properties/{propertyID}/roomtypes/"
 ```
@@ -134,7 +137,7 @@ Using a specific propertyID, get all roomtypes' information of the property.
 
 Example usage: client.get_property_room_types("w_w0307279", :i81n => "en-US")
 ```
-
+===================
 
 get_cancellation_charge: "GET /reservation/cancelcharge/"
 ```
@@ -161,14 +164,14 @@ Format expected (JSON content type):
 
 Example usage: client.post_reservation_request("w_w0307279", "2016-09-15", "2016-09-18")
 ```
-
+===================
 
 
 TO BE TESTED. post_reservation_confirmation: "POST /reservation/confirm"
 ```
 ---
 ```
-
+===================
 
 TO BE TESTED. post_cancel_reservation:     "POST /reservation/cancel"
 ```
