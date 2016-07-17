@@ -22,7 +22,7 @@ module RoomalloApi
 
     END_POINTS = YAML::load(File.open(File.join('lib', 'roomallo_api', 'end_points.yml')))
     URL = "https://api.ytlabs.co.kr/stage/v1"
-    VALID_CONTENT_TYPES = ["json", "xml"].freeze
+    VALID_CONTENT_TYPES = [:json, :xml].freeze
 
     format :json
     default_timeout 1 #Hard timeout after 1 second.
@@ -31,7 +31,7 @@ module RoomalloApi
 
     def initialize(token, content_type=nil)
       @token = token
-      @content_type = "application/#{content_type}" || "application/json"
+      @content_type = "application/#{content_type.to_s}" || "application/json"
       @base_url = URL
       @errors = []
 

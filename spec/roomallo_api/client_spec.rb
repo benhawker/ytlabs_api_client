@@ -3,7 +3,7 @@ require 'spec_helper'
 describe RoomalloApi::Client do
   ## Generates a 36 char length token.
   let(:token) { SecureRandom.hex(18) }
-  let(:content_type) { "json" }
+  let(:content_type) { :json }
   let(:client) { described_class.new(token, content_type) }
 
   describe "Client" do
@@ -20,18 +20,19 @@ describe RoomalloApi::Client do
     end
 
     context "content_type" do
-      it "defaults to return json" do
+      it "accepts json" do
+        client = described_class.new(token, :json)
         expect(client.content_type).to eq "application/json"
       end
 
       it "accepts xml" do
-        client = described_class.new(token, "xml")
+        client = described_class.new(token, :xml)
         expect(client.content_type).to eq "application/xml"
       end
 
       it "does not content types other than json or xml" do
         error_message = "Your content type is invalid. 'json' or 'xml' are the 2 valid options"
-        expect { described_class.new(token, "html") }.to raise_error (error_message)
+        expect { described_class.new(token, :html) }.to raise_error (error_message)
       end
     end
 
@@ -66,7 +67,7 @@ describe RoomalloApi::Client do
         end
 
         it "returns a property within a parsed response" do
-          client = RoomalloApi::Client.new(token, "json")
+          client = RoomalloApi::Client.new(token, :json)
           response = client.get_property("w_w0307360")
           expect(response).to eq response
         end
@@ -89,8 +90,8 @@ describe RoomalloApi::Client do
         end
 
         it "returns 2 properties within a parsed response" do
-          client = RoomalloApi::Client.new(token, "json")
-          response = client.get_properties
+          client = RoomalloApi::Client.new(token, :json)
+          response = client.get_properties(updated_at: Date.today)
           expect(response).to eq response
         end
       end
@@ -104,7 +105,7 @@ describe RoomalloApi::Client do
       end
 
       it "returns 2 room_types within a parsed response" do
-        client = RoomalloApi::Client.new(token, "json")
+        client = RoomalloApi::Client.new(token, :json)
         response = client.get_room_types
         expect(response).to eq response
       end
