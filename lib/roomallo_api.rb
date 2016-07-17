@@ -1,4 +1,3 @@
-require 'active_model'
 require 'json'
 require 'yaml'
 require 'httparty'

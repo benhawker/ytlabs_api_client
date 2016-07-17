@@ -9,6 +9,5 @@ Gem::Specification.new do |s|
   s.files    =   Dir.glob("{lib,spec}/**/*") + %w(Gemfile README.md)
   s.license  = 'MIT'
 
-  s.add_dependency 'activemodel'
   s.add_dependency 'httparty'
 end

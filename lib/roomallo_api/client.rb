@@ -103,7 +103,7 @@ module RoomalloApi
     # The responses from the API are somewhat misleading. Calls that one might expect to 404 seem to return 403 Forbidden
     # with "message"=>"Authorization header requires 'Credential' parameter. Consider how to provide more helpful messages.
     def prepare_response(response)
-      if response.parsed_response["status"] == 200..206
+      if response.parsed_response["status"] == (200..206)
         parse_successful_response(response)
       else
         # Temporary
