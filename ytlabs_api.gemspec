@@ -1,5 +1,5 @@
 Gem::Specification.new do |s|
-  s.name  = 'ytlabs_client'
+  s.name  = 'ytlabs_api_client'
   s.version = YTLabsApi::VERSION
   s.date    = '2016-07-05'
   s.summary = 'YT Labs API Ruby Client'
