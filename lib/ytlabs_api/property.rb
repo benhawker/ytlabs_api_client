@@ -1,8 +1,8 @@
-module RoomalloApi
+module YTLabsApi
   module Property
 
     # GET /properties/
-    # Use this resource to get a response a list of properties in the Roomallo API.
+    # Use this resource to get a response a list of properties in the YTLabs API.
     #
     # Parameters:
     #

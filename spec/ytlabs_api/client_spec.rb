@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe RoomalloApi::Client do
+describe YTLabsApi::Client do
   ## Generates a 36 char length token.
   let(:token) { SecureRandom.hex(18) }
   let(:content_type) { :json }
@@ -8,7 +8,7 @@ describe RoomalloApi::Client do
 
   describe "Client" do
     it "instantiates a new client object" do
-      expect(client).to be_a (RoomalloApi::Client)
+      expect(client).to be_a (YTLabsApi::Client)
     end
 
     context "token" do
@@ -67,7 +67,7 @@ describe RoomalloApi::Client do
         end
 
         it "returns a property within a parsed response" do
-          client = RoomalloApi::Client.new(token, :json)
+          client = YTLabsApi::Client.new(token, :json)
           response = client.get_property("w_w0307360")
           expect(response).to eq response
         end
@@ -90,7 +90,7 @@ describe RoomalloApi::Client do
         end
 
         it "returns 2 properties within a parsed response" do
-          client = RoomalloApi::Client.new(token, :json)
+          client = YTLabsApi::Client.new(token, :json)
           response = client.get_properties(updated_at: Date.today)
           expect(response).to eq response
         end
@@ -105,7 +105,7 @@ describe RoomalloApi::Client do
       end
 
       it "returns 2 room_types within a parsed response" do
-        client = RoomalloApi::Client.new(token, :json)
+        client = YTLabsApi::Client.new(token, :json)
         response = client.get_room_types
         expect(response).to eq response
       end
@@ -120,7 +120,7 @@ describe RoomalloApi::Client do
       end
 
       it "returns a property within a parsed response" do
-        client = RoomalloApi::Client.new(token, :json)
+        client = YTLabsApi::Client.new(token, :json)
         response = client.get_provinces
         expect(response).to eq response
       end
@@ -132,7 +132,7 @@ describe RoomalloApi::Client do
   describe "#build_url" do
     context "without identifier (i.e. a room hash/id)" do
       it "builds the endpoint URL correctly" do
-        stub_const("RoomalloApi::CLient::END_POINTS", { get_properties: "properties" } )
+        stub_const("YTLabs::CLient::END_POINTS", { get_properties: "properties" } )
         action = "get_properties"
         expect(client.send(:build_url, action)).to eq "https://api.ytlabs.co.kr/stage/v1/properties"
       end
@@ -140,7 +140,7 @@ describe RoomalloApi::Client do
 
     context "with an identifier (i.e. a room hash/id)" do
       it "builds the endpoint URL correctly" do
-        stub_const("RoomalloApi::CLient::END_POINTS", { get_properties: "properties" } )
+        stub_const("YTLabsApi::CLient::END_POINTS", { get_properties: "properties" } )
         action = "get_properties"
         identifier = "123"
         expect(client.send(:build_url, action, identifier)).to eq "https://api.ytlabs.co.kr/stage/v1/properties/123"

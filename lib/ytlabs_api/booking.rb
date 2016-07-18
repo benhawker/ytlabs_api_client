@@ -1,4 +1,4 @@
-module RoomalloApi
+module YTLabsApi
   module Booking
 
     # POST /reservation/holding/

@@ -1,4 +1,4 @@
-Roomallo API Client
+YTLabs API Client
 ===================
 
 A Ruby wrapper packaged as a Gem enabling Ruby calls to the Yello Travel Labs API which provides endpoints to search & book their inventory of Korea based rental properties. Visit Yello Travel Labs at [http://www.ytlabs.co.kr/](http://www.ytlabs.co.kr/). You will need an access token.
@@ -16,7 +16,7 @@ httparty [github.com/jnunemaker/httparty](http://www.github.com/jnunemaker/httpa
 ### Usage:
 
 ```
-client = RoomalloApi::Client.new("your_token", :json)
+client = YTLabsApi::Client.new("your_token", :json)
 ```
 
 ===================
@@ -27,7 +27,7 @@ client = RoomalloApi::Client.new("your_token", :json)
 
 #### get_properties:     "GET /properties/"
 ```
-Use this resource to get a response a list of properties in the Roomallo API.
+Use this resource to get a response a list of properties in the YTLabs API.
 
 - Required => updated_at                    Date at which data starts being returned. (YYYY-MM-
 - Optional => i18n        default: "ko-KR"  Return text in other lanaguages(ko-KR, en-US, zh-CN,

@@ -1,4 +1,4 @@
-module RoomalloApi
+module YTLabsApi
   module SupplementaryInformation
 
     # GET /provincecode/

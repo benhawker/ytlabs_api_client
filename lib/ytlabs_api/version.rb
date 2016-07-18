@@ -1,3 +1,3 @@
-module RoomalloApi
+module YTLabsApi
   VERSION = '0.0.1'
 end

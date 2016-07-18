@@ -1,4 +1,4 @@
-module RoomalloApi
+module YTLabsApi
   module Cancellation
 
     # POST /reservation/cancel/

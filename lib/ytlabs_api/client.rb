@@ -1,7 +1,7 @@
-# +RoomalloApi::Client+ - entry class to the API client.
+# +YTLabsApi::Client+ - entry class to the API client.
 #
 # Proposed usage:
-# => client = RoomalloApi::Client.new("your_token", :json)
+# => client = YTLabsApi::Client.new("your_token", :json)
 # => client.get_properties(params_hash)
 
 require_relative 'availability'
@@ -12,18 +12,18 @@ require_relative 'cancellation'
 require_relative 'room_type'
 
 
-module RoomalloApi
+module YTLabsApi
   class Client
     include HTTParty
 
-    include RoomalloApi::Availability
-    include RoomalloApi::Booking
-    include RoomalloApi::Cancellation
-    include RoomalloApi::Property
-    include RoomalloApi::RoomType
-    include RoomalloApi::SupplementaryInformation
+    include YTLabsApi::Availability
+    include YTLabsApi::Booking
+    include YTLabsApi::Cancellation
+    include YTLabsApi::Property
+    include YTLabsApi::RoomType
+    include YTLabsApi::SupplementaryInformation
 
-    END_POINTS = YAML::load(File.open(File.join('lib', 'roomallo_api', 'end_points.yml')))
+    END_POINTS = YAML::load(File.open(File.join('lib', 'ytlabs_api', 'end_points.yml')))
     URL = "https://api.ytlabs.co.kr/stage/v1"
     VALID_CONTENT_TYPES = [:json, :xml].freeze
 
@@ -75,7 +75,7 @@ module RoomalloApi
     end
 
 
-    ## Accepts underscored variables/params & converts them to camelCase as required by the Roomallo API.
+    ## Accepts underscored variables/params & converts them to camelCase as required by the YTLabs API.
     ## The intention is to 'Rubify' the wrapper allowing underscore_style_variable_naming.
     ## Example:
     ## camelize_params_keys!({:room_code=>"123", :search_start_date=>"456"})

@@ -1,4 +1,4 @@
-require "roomallo_api"
+require "ytlabs_api"
 require "webmock/rspec"
 
 # Disable all net connections except localhost.
