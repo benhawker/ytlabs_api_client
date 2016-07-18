@@ -13,10 +13,18 @@ httparty [github.com/jnunemaker/httparty](http://www.github.com/jnunemaker/httpa
 
 ===================
 
+### Install:
+
+```
+gem install 'ytlabs_api_client'
+```
+
+===================
+
 ### Usage:
 
 ```
-client = YTLabsApi::Client.new("your_token", :json)
+client = YTLabsApi::Client.new(token, :json)
 ```
 
 ===================
@@ -86,7 +94,6 @@ Example usage: client.get_cities
 ```
 ===================
 
-
 #### get_extra_service_codes: "GET /extraservicecode/"
 ```
 Returns a list mapping the codes and names of extra services.
@@ -105,7 +112,7 @@ Example usage: client.get_theme_codes
 ```
 ===================
 
-#### ERRORS. get_reservations:     "GET /reservation/information"
+#### get_reservations:     "GET /reservation/information"
 ```
 1. Use this resource with a set of dates to retrieve a collection of reservations between the given dates
 2. Use this resource with a reservation identifier(hash) + the start date to retrieve a collection of one reservation.
@@ -153,29 +160,44 @@ Example usage: client.get_cancellation_charge("w_WP20160705145532ECD5")
 
 #### POST Requests
 
-#### TO BE TESTED. post_reservation_request(property_identifier, start_date, end_date):     "POST /reservation/holding/"
+#### post_reservation_request(property_identifier, start_date, end_date):     "POST /reservation/holding/"
 ```
 Before making a reservation, the room must be held - to prevent double booking.
 
-Format expected (JSON content type):
-  {
-    "roomCode" : "w_w0814002_R01",
-    "checkInDate" : "2016-09-15",
-    "checkOutDate" : "2016-09-16"
-  }
-
-Example usage: client.post_reservation_request("w_w0307279", "2016-09-15", "2016-09-18")
+Example usage: client.post_reservation_request("w_w0814002_R01", "2016-07-01", "2016-07-10")
 ```
 ===================
 
 
-#### TO BE TESTED. post_reservation_confirmation: "POST /reservation/confirm"
+#### post_reservation_confirmation: "POST /reservation/confirm"
 ```
----
+Confirm a booking.
+
+Format expected (Ruby Hash):
+
+request_body = {
+                  "reservationNo" => "w_WP20160718164753DE39",
+                  "roomtypeCode" => "w_w0814002_R01",
+                  "checkInDate" => "2016-07-01",
+                  "checkOutDate" => "2016-07-10",
+                  "guestName" => "Bob",
+                  "guestCount" => 4,
+                  "adultCount" => 2,
+                  "childrenCount" => 2,
+                  "paidPrice" => 2000.0,
+                  "sellingPrice" => 2000.0,
+                  "commissionPrice" => 200.0,
+                  "currency" => "KRW"
+                }
+
+Example usage: client.post_reservation_confirmation(request_body)
 ```
 ===================
 
-#### TO BE TESTED. post_cancel_reservation:     "POST /reservation/cancel"
+#### post_cancellation_request(reservation_number, paid_price, commission_price, currency)     "POST /reservation/cancel"
+
 ```
----
+Cancel a booking.
+
+Example usage: client.post_cancellation_request("w_WP20160718164753DE39", 2000.0, 200.0, "KRW")
 ```
