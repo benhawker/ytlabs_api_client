@@ -21,11 +21,13 @@ module YTLabsApi
                  :checkOutDate => "#{end_date}"
                }.to_json
 
-      HTTParty.post(
+      response = HTTParty.post(
         "#{build_url(__method__.to_s)}",
         body:    request_body,
         headers: { "Authorization" => token.to_s, "Content-Type" => "#{content_type}" }
       )
+
+      prepare_response(response)
     end
 
     # _________________________________________________________________________________________ #
@@ -59,11 +61,13 @@ module YTLabsApi
     # }
 
     def post_reservation_confirmation(request_body={})
-      HTTParty.post(
+      response = HTTParty.post(
         "#{build_url(__method__.to_s)}",
         body:    request_body.to_json,
         headers: { "Authorization" => token.to_s, "Content-Type" => "#{content_type}" }
       )
+
+      prepare_response(response)
     end
 
     # _________________________________________________________________________________________ #
@@ -90,7 +94,7 @@ module YTLabsApi
                  :searchEndDate => "#{end_date}"
                }
 
-      params.merge!( :roomCode => "#{reservation_identifier}" ) if reservation_identifier
+      params.merge!( :reservationNo => "#{reservation_identifier}" ) if reservation_identifier
 
       response = HTTParty.get(
         "#{build_url(__method__.to_s)}?#{transform_params!(params)}",
@@ -99,6 +103,5 @@ module YTLabsApi
 
       prepare_response(response)
     end
-
   end
 end

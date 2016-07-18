@@ -11,7 +11,7 @@ get_cities: 			       "citycode"
 get_extra_service_codes: "extraservicecode"
 get_theme_codes: 		     "themecode"
 
-get_reservations: 		   "resveration/information"
+get_reservations: 		   "reservation/information"
 
 get_room_types:			     "roomtypes"
 get_property_room_types: "properties"

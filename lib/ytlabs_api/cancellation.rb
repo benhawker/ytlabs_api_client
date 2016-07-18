@@ -21,11 +21,13 @@ module YTLabsApi
                  :currency              => "#{currency}"
                }.to_json
 
-      HTTParty.post(
+      response = HTTParty.post(
         "#{build_url(__method__.to_s)}",
         body:    request_body,
         headers: { "Authorization" => token.to_s, "Content-Type" => "#{content_type}" }
       )
+
+      prepare_response(response)
     end
 
     # GET /reservation/cancelcharge/
