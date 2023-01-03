@@ -10,21 +10,29 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    addressable (2.8.1)
+      public_suffix (>= 2.0.2, < 6.0)
     builder (3.2.2)
     coderay (1.1.1)
+    crack (0.4.5)
+      rexml
     diff-lcs (1.2.5)
-    httparty (0.13.7)
-      json (~> 1.8)
+    hashdiff (1.0.1)
+    httparty (0.21.0)
+      mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
     i18n (0.7.0)
-    json (1.8.3)
+    json (1.8.6)
     method_source (0.8.2)
+    mini_mime (1.1.2)
     minitest (5.9.0)
-    multi_xml (0.5.5)
+    multi_xml (0.6.0)
     pry (0.10.3)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    public_suffix (5.0.1)
+    rexml (3.2.5)
     rspec (3.5.0)
       rspec-core (~> 3.5.0)
       rspec-expectations (~> 3.5.0)
@@ -42,6 +50,10 @@ GEM
     thread_safe (0.3.5)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
+    webmock (3.18.1)
+      addressable (>= 2.8.0)
+      crack (>= 0.3.2)
+      hashdiff (>= 0.4.0, < 2.0.0)
 
 PLATFORMS
   ruby
@@ -51,6 +63,7 @@ DEPENDENCIES
   httparty
   pry
   rspec
+  webmock
 
 BUNDLED WITH
    1.12.5
